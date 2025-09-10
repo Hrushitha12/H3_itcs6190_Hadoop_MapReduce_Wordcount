@@ -107,20 +107,48 @@ To copy the output from HDFS to your local machine:
 
 ## Sample Input: 
  ```bash
-   Hello world
-   Hello Hadoop
-   Hadoop is powerful
-   Hadoop is used for big data
+  Cloud computing makes data analysis easier and faster.
+  Hadoop provides distributed storage and processing for big data.
+  Data analysis with MapReduce helps extract useful information.
+  Students learn cloud computing and big data in this course.
+  MapReduce jobs count words and compute their frequency.
    ```
 
 ## Expected output: 
  ```bash
-Hadoop 3
-Hello 2
-used 1
-for 1
-big 1
-data 1
-powerful 1
-world 1
+and     4
+data    2
+big     2
+analysis        2
+MapReduce       2
+computing       2
+data.   1
+with    1
+makes   1
+useful  1
+Students        1
+faster. 1
+storage 1
+cloud   1
+Hadoop  1
+frequency.      1
+processing      1
+provides        1
+this    1
+compute 1
+Cloud   1
+Data    1
+course. 1
+jobs    1
+for     1
+easier  1
+helps   1
+their   1
+count   1
+extract 1
+learn   1
+information.    1
+words   1
+distributed     1
    ```
+
