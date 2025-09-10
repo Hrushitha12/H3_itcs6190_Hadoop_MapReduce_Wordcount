@@ -104,6 +104,24 @@ To copy the output from HDFS to your local machine:
     ```
 3. Commit and push to your repo so that we can able to see your output
 
+## Challenges Faced & Solutions
+
+**1. Maven build errors due to `tools.jar`**  
+- *Challenge:* The initial Maven build failed with an error about `jdk.tools:jdk.tools:jar:1.8` because it was trying to resolve `tools.jar` from a JRE instead of a full JDK.  
+- *Solution:* Installed a proper JDK, set the `JAVA_HOME` environment variable, and ensured `%JAVA_HOME%\bin` was at the top of the system `Path`. After that, Maven recognized the JDK and built successfully.
+
+**2. Docker command not recognized**  
+- *Challenge:* Even though Docker Desktop was running, the `docker` command was not available in PowerShell.  
+- *Solution:* Added Docker’s `resources\bin` folder to the system `Path` so that `docker.exe` could be run from the terminal. Once this was fixed, I was able to bring up the Hadoop cluster with `docker compose up`.
+
+**3. ClassNotFoundException when running Hadoop job**  
+- *Challenge:* Running the Hadoop jar initially failed with `ClassNotFoundException: com.example.Controller`.  
+- *Solution:* The main class was actually in the `com.example.controller` package (`Controller.java`). By using the fully-qualified class name `com.example.controller.Controller` when invoking the Hadoop job, the program executed correctly.
+
+**4. Retrieving output from HDFS**  
+- *Challenge:* After the job ran, I had difficulty accessing the output because the reducer results were inside HDFS and the copied folder structure didn’t match expectations.  
+- *Solution:* Used `hdfs dfs -cat` inside the container to dump the reducer output into a single file (`/tmp/part-r-00000`) and then copied it back to the local machine with `docker cp`. This gave me the final `results/part-r-00000` file required for submission.
+
 
 ## Sample Input: 
  ```bash
@@ -114,7 +132,7 @@ To copy the output from HDFS to your local machine:
   MapReduce jobs count words and compute their frequency.
    ```
 
-## Expected output: 
+## Obtained output: 
  ```bash
 and     4
 data    2
@@ -151,4 +169,5 @@ information.    1
 words   1
 distributed     1
    ```
+
 
